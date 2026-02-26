@@ -1,8 +1,10 @@
+// CORREÇÃO: Removido o http://127.0.0.1:5001
+// Agora ele vai procurar a rota no próprio servidor do Render
 const CONFIG = {
-    apiUrl: '/salvar_cotacao' // Correção essencial para o Render
+    apiUrl: '/salvar_cotacao'
 };
 
-// Máscara de Telefone
+// Máscara de Telefone (Mantida para sua conveniência)
 const phoneInput = document.getElementById('phone');
 if(phoneInput) {
     phoneInput.addEventListener('input', (e) => {
@@ -11,12 +13,12 @@ if(phoneInput) {
     });
 }
 
-// Envio do Formulário
 document.getElementById('contactForm').addEventListener('submit', async function(e) {
     e.preventDefault();
+
     const btn = document.getElementById('submitBtn');
     
-    // Dados para o banco de dados
+    // CORREÇÃO: Certifique-se que esses IDs (name, email, phone...) existem no seu HTML
     const formData = {
         nome: document.getElementById('name').value.trim(),
         email: document.getElementById('email').value.trim(),
@@ -36,13 +38,15 @@ document.getElementById('contactForm').addEventListener('submit', async function
         });
 
         if (response.ok) {
-            alert("✅ Solicitação enviada com sucesso!");
+            alert("✅ Solicitação enviada com sucesso! Nossa equipe entrará em contato.");
             document.getElementById('contactForm').reset();
         } else {
-            alert("❌ Erro ao salvar dados.");
+            alert("❌ Erro ao salvar solicitação no servidor.");
         }
     } catch (error) {
-        alert("🚨 O servidor está iniciando. Aguarde 10 segundos e tente novamente.");
+        // Se cair aqui, é porque o servidor ainda está "acordando" ou o link está errado
+        console.error("Erro de conexão:", error);
+        alert("🚨 Erro de conexão! O servidor pode estar iniciando. Tente novamente em alguns segundos.");
     } finally {
         btn.disabled = false;
         btn.textContent = 'Solicitar Cotação';
