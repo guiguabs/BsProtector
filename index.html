@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BsProtector | Corretora de Seguros</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <style>
+        :root { --blue-dark: #002d72; --blue-light: #0d6efd; }
+        body { font-family: 'Arial', sans-serif; color: #333; background-color: #f8f9fa; overflow-x: hidden; }
+
+        .navbar { background: var(--blue-dark); padding: 15px 0; }
+
+        /* SEÇÃO HERO COM FOTO REAL DE CARRO BRANCO */
+        .hero { 
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+                        url('https://images.unsplash.com/photo-1555215695-3004980ad54e?q=80&w=2070&auto=format&fit=crop') !important;
+            background-size: cover !important;
+            background-position: center !important;
+            background-attachment: fixed;
+            color: white !important; 
+            padding: 120px 0; 
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 60vh;
+        }
+
+        .service-card { 
+            border: none; transition: 0.3s; padding: 30px; 
+            border-radius: 15px; background: white; text-align: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1); height: 100%;
+        }
+        
+        .service-card:hover { transform: translateY(-10px); box-shadow: 0 8px 16px rgba(0,0,0,0.2); }
+        .service-card i { font-size: 3rem; color: var(--blue-light); margin-bottom: 20px; }
+
+        .form-box { background: #fff; padding: 40px; border-radius: 20px; box-shadow: 0 0 40px rgba(0,0,0,0.1); }
+
+        .whatsapp-float {
+            position: fixed; bottom: 20px; right: 20px;
+            background-color: #25d366; color: white !important;
+            border-radius: 50%; width: 60px; height: 60px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 24px; z-index: 1000; transition: 0.3s;
+        }
+        .whatsapp-float:hover { transform: scale(1.1); }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#"><i class="fas fa-shield-alt"></i> BSPROTECTOR</a>
+            <div class="text-white d-none d-md-block">Segurança e Confiança</div>
+        </div>
+    </nav>
+
+    <header class="hero" data-aos="fade-in">
+        <div class="container">
+            <h1 class="display-3 fw-bold" data-aos="fade-down" data-aos-duration="1000">Protegendo seu patrimônio</h1>
+            <p class="lead mb-4" data-aos="fade-up" data-aos-duration="1000">Soluções completas em seguros para você e sua empresa.</p>
+            <a href="#cotacao" class="btn btn-primary btn-lg px-5 shadow fw-bold">Solicitar Cotação Agora</a>
+        </div>
+    </header>
+
+    <section class="container py-5">
+        <div class="text-center mb-5" data-aos="fade-up">
+            <h2 class="fw-bold">Nossos Serviços</h2>
+            <p class="text-muted">Proteção sob medida para você</p>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-3" data-aos="zoom-in" data-aos-delay="100">
+                <div class="service-card">
+                    <i class="fas fa-car"></i>
+                    <h4>Seguro Auto</h4>
+                    <p>Total proteção para o seu veículo contra roubos e danos.</p>
+                </div>
+            </div>
+            <div class="col-md-3" data-aos="zoom-in" data-aos-delay="200">
+                <div class="service-card">
+                    <i class="fas fa-heart"></i>
+                    <h4>Seguro Vida</h4>
+                    <p>Tranquilidade para você e para sua família.</p>
+                </div>
+            </div>
+            <div class="col-md-3" data-aos="zoom-in" data-aos-delay="300">
+                <div class="service-card">
+                    <i class="fas fa-home"></i>
+                    <h4>Residencial</h4>
+                    <p>Cuidado completo para o seu patrimônio mais valioso.</p>
+                </div>
+            </div>
+            <div class="col-md-3" data-aos="zoom-in" data-aos-delay="400">
+                <div class="service-card">
+                    <i class="fas fa-briefcase"></i>
+                    <h4>Empresarial</h4>
+                    <p>A segurança que o seu negócio precisa para crescer.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="cotacao" class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-7" data-aos="fade-right">
+                <div class="form-box">
+                    <h2 class="text-center fw-bold mb-4">Solicite sua Cotação</h2>
+                    <form id="contactForm">
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Nome Completo</label>
+                            <input type="text" id="name" class="form-control" placeholder="Seu nome" required>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold">E-mail</label>
+                                <input type="email" id="email" class="form-control" placeholder="email@exemplo.com" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold">Telefone</label>
+                                <input type="text" id="phone" class="form-control" placeholder="(00) 00000-0000" required>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Tipo de Seguro</label>
+                            <select id="insurance-type" class="form-select" required>
+                                <option value="" disabled selected>Selecione...</option>
+                                <option value="Auto">Auto</option>
+                                <option value="Vida">Vida</option>
+                                <option value="Residencial">Residencial</option>
+                                <option value="Empresarial">Empresarial</option>
+                            </select>
+                        </div>
+                        <button type="submit" id="submitBtn" class="btn btn-primary w-100 p-3 fw-bold">ENVIAR DADOS PARA ANÁLISE</button>
+                    </form>
+                    <div id="responseMsg" class="mt-3 text-center d-none alert"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <a href="#" class="whatsapp-float"><i class="fab fa-whatsapp"></i></a>
+
+    <footer class="bg-dark text-white py-4 text-center mt-5">
+        <p class="mb-0">© 2026 BsProtector Corretora de Seguros.</p>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Configurado para animar ao subir e descer (once: false)
+        AOS.init({ 
+            duration: 800, 
+            once: false, 
+            mirror: true 
+        });
+
+        // Máscara de Telefone
+        document.getElementById('phone').addEventListener('input', (e) => {
+            let x = e.target.value.replace(/\D/g, '').match(/(\d{0,2})(\d{0,5})(\d{0,4})/);
+            e.target.value = !x[2] ? x[1] : '(' + x[1] + ') ' + x[2] + (x[3] ? '-' + x[3] : '');
+        });
+
+        // Simulação de envio para seu servidor local
+        document.getElementById('contactForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const btn = document.getElementById('submitBtn');
+            btn.disabled = true;
+            btn.innerHTML = 'Enviando...';
+
+            try {
+                const response = await fetch('http://127.0.0.1:5001/salvar_cotacao', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        name: document.getElementById('name').value,
+                        email: document.getElementById('email').value,
+                        phone: document.getElementById('phone').value,
+                        type: document.getElementById('insurance-type').value
+                    })
+                });
+                if (response.ok) {
+                    alert('Enviado com sucesso!');
+                    this.reset();
+                } else { alert('Servidor não encontrado.'); }
+            } catch (err) {
+                alert('Erro de conexão com 127.0.0.1:5001');
+            } finally {
+                btn.disabled = false;
+                btn.textContent = 'ENVIAR DADOS PARA ANÁLISE';
+            }
+        });
+    </script>
+</body>
+</html>
