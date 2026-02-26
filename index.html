@@ -15,7 +15,6 @@
 
         .navbar { background: var(--blue-dark); padding: 15px 0; }
 
-        /* SEÇÃO HERO COM FOTO REAL DE CARRO BRANCO */
         .hero { 
             background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
                         url('https://images.unsplash.com/photo-1555215695-3004980ad54e?q=80&w=2070&auto=format&fit=crop') !important;
@@ -114,21 +113,21 @@
                     <form id="contactForm">
                         <div class="mb-3">
                             <label class="form-label fw-bold">Nome Completo</label>
-                            <input type="text" id="name" class="form-control" placeholder="Seu nome" required>
+                            <input type="text" id="name" name="name" class="form-control" placeholder="Seu nome" required>
                         </div>
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label class="form-label fw-bold">E-mail</label>
-                                <input type="email" id="email" class="form-control" placeholder="email@exemplo.com" required>
+                                <input type="email" id="email" name="email" class="form-control" placeholder="email@exemplo.com" required>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label class="form-label fw-bold">Telefone</label>
-                                <input type="text" id="phone" class="form-control" placeholder="(00) 00000-0000" required>
+                                <input type="text" id="phone" name="phone" class="form-control" placeholder="(00) 00000-0000" required>
                             </div>
                         </div>
                         <div class="mb-3">
                             <label class="form-label fw-bold">Tipo de Seguro</label>
-                            <select id="insurance-type" class="form-select" required>
+                            <select id="insurance-type" name="type" class="form-select" required>
                                 <option value="" disabled selected>Selecione...</option>
                                 <option value="Auto">Auto</option>
                                 <option value="Vida">Vida</option>
@@ -136,64 +135,28 @@
                                 <option value="Empresarial">Empresarial</option>
                             </select>
                         </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Mensagem (Opcional)</label>
+                            <textarea id="message" name="message" class="form-control" rows="3"></textarea>
+                        </div>
                         <button type="submit" id="submitBtn" class="btn btn-primary w-100 p-3 fw-bold">ENVIAR DADOS PARA ANÁLISE</button>
                     </form>
-                    <div id="responseMsg" class="mt-3 text-center d-none alert"></div>
                 </div>
             </div>
         </div>
     </section>
 
-    <a href="#" class="whatsapp-float"><i class="fab fa-whatsapp"></i></a>
+    <a href="https://wa.me/SEUNUMERO" target="_blank" class="whatsapp-float"><i class="fab fa-whatsapp"></i></a>
 
     <footer class="bg-dark text-white py-4 text-center mt-5">
         <p class="mb-0">© 2026 BsProtector Corretora de Seguros.</p>
     </footer>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="script.js"></script>
     <script>
-        // Configurado para animar ao subir e descer (once: false)
-        AOS.init({ 
-            duration: 800, 
-            once: false, 
-            mirror: true 
-        });
-
-        // Máscara de Telefone
-        document.getElementById('phone').addEventListener('input', (e) => {
-            let x = e.target.value.replace(/\D/g, '').match(/(\d{0,2})(\d{0,5})(\d{0,4})/);
-            e.target.value = !x[2] ? x[1] : '(' + x[1] + ') ' + x[2] + (x[3] ? '-' + x[3] : '');
-        });
-
-        // Simulação de envio para seu servidor local
-        document.getElementById('contactForm').addEventListener('submit', async function(e) {
-            e.preventDefault();
-            const btn = document.getElementById('submitBtn');
-            btn.disabled = true;
-            btn.innerHTML = 'Enviando...';
-
-            try {
-                const response = await fetch('http://127.0.0.1:5001/salvar_cotacao', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        name: document.getElementById('name').value,
-                        email: document.getElementById('email').value,
-                        phone: document.getElementById('phone').value,
-                        type: document.getElementById('insurance-type').value
-                    })
-                });
-                if (response.ok) {
-                    alert('Enviado com sucesso!');
-                    this.reset();
-                } else { alert('Servidor não encontrado.'); }
-            } catch (err) {
-                alert('Erro de conexão com 127.0.0.1:5001');
-            } finally {
-                btn.disabled = false;
-                btn.textContent = 'ENVIAR DADOS PARA ANÁLISE';
-            }
-        });
+        // Inicializa animações
+        AOS.init({ duration: 800, once: false });
     </script>
 </body>
 </html>
