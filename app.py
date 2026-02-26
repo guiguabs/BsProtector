@@ -3,7 +3,7 @@ import sqlite3
 from flask import Flask, request, jsonify, render_template_string, redirect, url_for, send_from_directory
 from flask_cors import CORS
 
-# Configura o Flask para reconhecer a pasta atual
+# Configura o Flask
 app = Flask(__name__, static_folder='.', static_url_path='')
 CORS(app)
 
@@ -22,12 +22,15 @@ def init_db():
     conn.commit()
     conn.close()
 
+# COMANDO CRUCIAL: Inicializa o banco assim que o arquivo é lido pelo Render
+init_db()
+
 # ROTA PARA MOSTRAR O SITE
 @app.route('/')
 def index():
     return send_from_directory('.', 'index.html')
 
-# ROTA PARA SALVAR DADOS (Nomes em português para bater com o script.js)
+# ROTA PARA SALVAR DADOS
 @app.route('/salvar_cotacao', methods=['POST'])
 def salvar_cotacao():
     try:
@@ -58,7 +61,7 @@ def limpar_banco():
     except Exception as e:
         return f"Erro: {e}"
 
-# DASHBOARD DE LEADS (Acesse: seu-site.onrender.com/leads)
+# DASHBOARD DE LEADS
 @app.route('/leads')
 def ver_leads():
     try:
@@ -114,9 +117,7 @@ def ver_leads():
     except Exception as e:
         return f"Erro: {e}"
 
-# O FINAL CORRIGIDO PARA O RENDER
+# Para rodar localmente (opcional)
 if __name__ == '__main__':
-    init_db()
-    # O Render busca a porta automaticamente, se não achar usa a 10000
     port = int(os.environ.get("PORT", 10000))
     app.run(host='0.0.0.0', port=port)
