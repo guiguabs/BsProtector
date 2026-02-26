@@ -48,7 +48,6 @@
             display: flex; align-items: center; justify-content: center;
             font-size: 24px; z-index: 1000; transition: 0.3s;
         }
-        .whatsapp-float:hover { transform: scale(1.1); }
     </style>
 </head>
 <body>
@@ -62,44 +61,40 @@
 
     <header class="hero" data-aos="fade-in">
         <div class="container">
-            <h1 class="display-3 fw-bold" data-aos="fade-down" data-aos-duration="1000">Protegendo seu patrimônio</h1>
-            <p class="lead mb-4" data-aos="fade-up" data-aos-duration="1000">Soluções completas em seguros para você e sua empresa.</p>
+            <h1 class="display-3 fw-bold">Protegendo seu patrimônio</h1>
+            <p class="lead mb-4">Soluções completas em seguros para você e sua empresa.</p>
             <a href="#cotacao" class="btn btn-primary btn-lg px-5 shadow fw-bold">Solicitar Cotação Agora</a>
         </div>
     </header>
 
     <section class="container py-5">
-        <div class="text-center mb-5" data-aos="fade-up">
-            <h2 class="fw-bold">Nossos Serviços</h2>
-            <p class="text-muted">Proteção sob medida para você</p>
-        </div>
         <div class="row g-4">
-            <div class="col-md-3" data-aos="zoom-in" data-aos-delay="100">
+            <div class="col-md-3" data-aos="zoom-in">
                 <div class="service-card">
                     <i class="fas fa-car"></i>
                     <h4>Seguro Auto</h4>
                     <p>Total proteção para o seu veículo contra roubos e danos.</p>
                 </div>
             </div>
-            <div class="col-md-3" data-aos="zoom-in" data-aos-delay="200">
+            <div class="col-md-3" data-aos="zoom-in" data-aos-delay="100">
                 <div class="service-card">
                     <i class="fas fa-heart"></i>
                     <h4>Seguro Vida</h4>
                     <p>Tranquilidade para você e para sua família.</p>
                 </div>
             </div>
-            <div class="col-md-3" data-aos="zoom-in" data-aos-delay="300">
+            <div class="col-md-3" data-aos="zoom-in" data-aos-delay="200">
                 <div class="service-card">
                     <i class="fas fa-home"></i>
                     <h4>Residencial</h4>
-                    <p>Cuidado completo para o seu patrimônio mais valioso.</p>
+                    <p>Cuidado completo para o seu patrimônio.</p>
                 </div>
             </div>
-            <div class="col-md-3" data-aos="zoom-in" data-aos-delay="400">
+            <div class="col-md-3" data-aos="zoom-in" data-aos-delay="300">
                 <div class="service-card">
                     <i class="fas fa-briefcase"></i>
                     <h4>Empresarial</h4>
-                    <p>A segurança que o seu negócio precisa para crescer.</p>
+                    <p>A segurança que o seu negócio precisa.</p>
                 </div>
             </div>
         </div>
@@ -107,27 +102,27 @@
 
     <section id="cotacao" class="container py-5">
         <div class="row justify-content-center">
-            <div class="col-lg-7" data-aos="fade-right">
-                <div class="form-box">
+            <div class="col-lg-7">
+                <div class="form-box" data-aos="fade-up">
                     <h2 class="text-center fw-bold mb-4">Solicite sua Cotação</h2>
                     <form id="contactForm">
                         <div class="mb-3">
                             <label class="form-label fw-bold">Nome Completo</label>
-                            <input type="text" id="name" name="name" class="form-control" placeholder="Seu nome" required>
+                            <input type="text" id="name" class="form-control" placeholder="Seu nome" required>
                         </div>
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label class="form-label fw-bold">E-mail</label>
-                                <input type="email" id="email" name="email" class="form-control" placeholder="email@exemplo.com" required>
+                                <input type="email" id="email" class="form-control" placeholder="email@exemplo.com" required>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label class="form-label fw-bold">Telefone</label>
-                                <input type="text" id="phone" name="phone" class="form-control" placeholder="(00) 00000-0000" required>
+                                <input type="text" id="phone" class="form-control" placeholder="(00) 00000-0000" required>
                             </div>
                         </div>
                         <div class="mb-3">
                             <label class="form-label fw-bold">Tipo de Seguro</label>
-                            <select id="insurance-type" name="type" class="form-select" required>
+                            <select id="insurance-type" class="form-select" required>
                                 <option value="" disabled selected>Selecione...</option>
                                 <option value="Auto">Auto</option>
                                 <option value="Vida">Vida</option>
@@ -137,7 +132,7 @@
                         </div>
                         <div class="mb-3">
                             <label class="form-label fw-bold">Mensagem (Opcional)</label>
-                            <textarea id="message" name="message" class="form-control" rows="3"></textarea>
+                            <textarea id="message" class="form-control" rows="3" placeholder="Conte-nos mais..."></textarea>
                         </div>
                         <button type="submit" id="submitBtn" class="btn btn-primary w-100 p-3 fw-bold">ENVIAR DADOS PARA ANÁLISE</button>
                     </form>
@@ -146,17 +141,16 @@
         </div>
     </section>
 
-    <a href="https://wa.me/SEUNUMERO" target="_blank" class="whatsapp-float"><i class="fab fa-whatsapp"></i></a>
-
     <footer class="bg-dark text-white py-4 text-center mt-5">
         <p class="mb-0">© 2026 BsProtector Corretora de Seguros.</p>
     </footer>
 
+    <a href="https://wa.me/5511999999999" target="_blank" class="whatsapp-float"><i class="fab fa-whatsapp"></i></a>
+
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="script.js"></script>
-    <script>
-        // Inicializa animações
-        AOS.init({ duration: 800, once: false });
+    <script src="script.js"></script> <script>
+        // Inicializa as animações
+        AOS.init({ duration: 800, once: true });
     </script>
 </body>
 </html>
