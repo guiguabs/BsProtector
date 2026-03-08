@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BsProtector | Análise de Seguro Automotivo</title>
+    <title>BsProtector | Cotação e Análise Técnica</title>
     
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -16,104 +16,42 @@
             --bg-light: #f4f7f9;
         }
         
-        body { 
-            font-family: 'Segoe UI', Arial, sans-serif; 
-            background-color: var(--bg-light); 
-            margin: 0; 
-            color: #333;
-        }
+        body { font-family: 'Segoe UI', Arial, sans-serif; background-color: var(--bg-light); margin: 0; color: #333; }
 
-        /* Navbar */
-        .navbar { 
-            background: var(--blue-dark); 
-            padding: 15px; 
-            border-bottom: 3px solid var(--accent); 
-            color: white; 
-            text-align: center; 
-        }
-
-        /* Hero */
+        .navbar { background: var(--blue-dark); padding: 15px; border-bottom: 3px solid var(--accent); color: white; text-align: center; }
+        
         .hero { 
             background: linear-gradient(135deg, var(--blue-primary), var(--blue-dark)); 
-            color: white; 
-            padding: 60px 20px; 
-            text-align: center; 
+            color: white; padding: 60px 20px; text-align: center; 
         }
 
-        /* Caixa do Formulário */
         .form-box { 
-            background: white; 
-            padding: 40px; 
-            border-radius: 25px; 
-            border-top: 5px solid var(--accent); 
-            max-width: 900px; 
-            margin: -50px auto 40px; 
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1); 
+            background: white; padding: 40px; border-radius: 25px; 
+            border-top: 5px solid var(--accent); max-width: 900px; 
+            margin: -50px auto 40px; box-shadow: 0 15px 35px rgba(0,0,0,0.1); 
         }
 
         .section-title { 
-            font-size: 1rem; 
-            font-weight: bold; 
-            color: var(--blue-dark); 
-            border-left: 4px solid var(--accent); 
-            padding-left: 10px; 
-            margin: 25px 0 15px; 
-            text-transform: uppercase;
+            font-size: 1rem; font-weight: bold; color: var(--blue-dark); 
+            border-left: 4px solid var(--accent); padding-left: 10px; margin: 25px 0 15px; text-transform: uppercase;
         }
 
-        .form-label { 
-            font-weight: 600; 
-            color: #444; 
-            font-size: 0.85rem; 
-            margin-bottom: 5px;
-            display: block;
-        }
+        .form-label { font-weight: 600; color: #444; font-size: 0.85rem; margin-bottom: 5px; display: block; }
+        
+        .form-control, .form-select { border-radius: 8px; margin-bottom: 10px; padding: 12px; border: 1px solid #ddd; }
 
-        .form-control, .form-select { 
-            border-radius: 8px; 
-            margin-bottom: 10px; 
-            padding: 12px; 
-            border: 1px solid #ddd;
-        }
-
-        /* Botão de Envio */
         .btn-send { 
-            background: var(--accent); 
-            color: white; 
-            padding: 18px; 
-            border-radius: 50px; 
-            font-weight: bold; 
-            border: none; 
-            width: 100%; 
-            cursor: pointer; 
-            font-size: 1.2rem; 
-            transition: 0.3s; 
-            margin-top: 20px;
+            background: var(--accent); color: white; padding: 18px; border-radius: 50px; 
+            font-weight: bold; border: none; width: 100%; cursor: pointer; 
+            font-size: 1.2rem; transition: 0.3s; margin-top: 20px;
         }
+        .btn-send:hover { background: #e67e00; transform: translateY(-3px); box-shadow: 0 8px 20px rgba(255,140,0,0.3); }
 
-        .btn-send:hover { 
-            background: #e67e00; 
-            transform: translateY(-3px); 
-            box-shadow: 0 8px 20px rgba(255,140,0,0.3); 
-        }
-
-        /* WhatsApp Flutuante */
         .whatsapp-float { 
-            position: fixed; 
-            bottom: 25px; 
-            right: 25px; 
-            background: #25d366; 
-            color: white !important; 
-            width: 65px; 
-            height: 65px; 
-            border-radius: 50%; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            font-size: 32px; 
-            text-decoration: none; 
-            z-index: 1000; 
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            position: fixed; bottom: 25px; right: 25px; background: #25d366; 
+            color: white !important; width: 65px; height: 65px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; 
+            font-size: 32px; text-decoration: none; z-index: 1000; box-shadow: 0 4px 12px rgba(0,0,0,0.2);
         }
     </style>
 </head>
@@ -128,7 +66,7 @@
     <header class="hero">
         <div class="container">
             <h1 class="fw-bold">Análise Técnica de Seguro Auto</h1>
-            <p class="lead">Forneça os dados abaixo para calcularmos seu bônus e melhor tarifa.</p>
+            <p class="lead">Dados essenciais para cotação bônus e tarifa oficial.</p>
         </div>
     </header>
 
@@ -140,19 +78,19 @@
                 <div class="row g-3">
                     <div class="col-md-6">
                         <label class="form-label">Nome Completo</label>
-                        <input type="text" class="form-control" placeholder="Nome do segurado" required>
+                        <input type="text" class="form-control" placeholder="Nome do Segurado" required>
                     </div>
                     <div class="col-md-3">
                         <label class="form-label">CPF</label>
                         <input type="text" class="form-control" placeholder="000.000.000-00" required>
                     </div>
                     <div class="col-md-3">
-                        <label class="form-label">CEP (Local de Pernoite)</label>
+                        <label class="form-label">CEP Local de Pernoite</label>
                         <input type="text" class="form-control" placeholder="00000-000" required>
                     </div>
                 </div>
 
-                <div class="section-title">2. Perfil de Uso e Condutores</div>
+                <div class="section-title">2. Perfil de Risco e Uso</div>
                 <div class="row g-3">
                     <div class="col-md-4">
                         <label class="form-label">Usa para Uber / Aplicativos?</label>
@@ -185,36 +123,35 @@
                     </div>
                     <div class="col-md-8">
                         <label class="form-label">Modelo, Ano e Versão</label>
-                        <input type="text" class="form-control" placeholder="Ex: Chevrolet Onix LT 1.0 2023" required>
+                        <input type="text" class="form-control" placeholder="Ex: Onix LT 1.0 2023" required>
                     </div>
                     <div class="col-12">
-                        <label class="form-label">Informações Adicionais (Sinistros anteriores, bônus atual, etc.)</label>
-                        <textarea class="form-control" rows="3" placeholder="Conte-nos detalhes para ajudar na negociação com a seguradora."></textarea>
+                        <label class="form-label">Informações Adicionais (Bônus, sinistros, etc.)</label>
+                        <textarea class="form-control" rows="3" placeholder="Informar bônus atual ajuda na negociação da tarifa."></textarea>
                     </div>
                 </div>
 
-                <div class="p-3 bg-light rounded small text-muted mt-3">
-                    <i class="fas fa-lock me-2"></i> Seus dados estão protegidos pela LGPD e serão usados apenas para fins de cotação oficial.
-                </div>
+                <p style="font-size: 0.8rem; color: #777; margin-top: 15px;">
+                    <i class="fas fa-lock"></i> Seus dados estão protegidos pela LGPD para fins de cotação.
+                </p>
 
                 <button type="submit" class="btn-send shadow">SOLICITAR ANÁLISE TÉCNICA</button>
             </form>
         </div>
     </div>
 
-    <footer class="text-center py-4 text-muted small">
-        BSPROTECTOR CORRETORA DE SEGUROS | © 2026 <br>
-        Susep: [Seu Registro Aqui]
+    <footer style="text-align: center; padding: 20px; color: #888; font-size: 0.8rem;">
+        BSPROTECTOR CORRETORA DE SEGUROS | © 2026
     </footer>
 
-    <a href="https://wa.me/5511982917215?text=Olá!%20Enviei%20meus%20dados%20pelo%20site%20e%20gostaria%20de%20agilizar%20minha%20cotação." target="_blank" class="whatsapp-float">
+    <a href="https://wa.me/5511982917215?text=Olá!%20Enviei%20meus%20dados%20pelo%20site%20para%20análise." target="_blank" class="whatsapp-float">
         <i class="fab fa-whatsapp"></i>
     </a>
 
     <script>
         document.getElementById('insuranceForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            alert('Dados enviados com sucesso! Nossa equipe técnica iniciará o cálculo do seu seguro e entrará em contato.');
+            alert('Dados recebidos com sucesso! Nossa equipe técnica iniciará a cotação.');
             this.reset();
         });
     </script>
