@@ -1,122 +1,95 @@
-import os
-import sqlite3
-from flask import Flask, request, jsonify, render_template_string, redirect, url_for, send_from_directory
-from flask_cors import CORS
+/* 1. SEU GRADIENTE E HERO CORRIGIDOS */
+.hero {
+    background: linear-gradient(135deg, #007bff, #0056b3) !important;
+    color: white !important;
+    min-height: 50vh;
+    padding: 60px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
 
-# Configura o Flask para reconhecer a pasta atual
-app = Flask(__name__, static_folder='.', static_url_path='')
-CORS(app)
+/* 2. SEUS CARDS (Ajustados para as classes do seu HTML) */
+.service-card, .card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: none !important;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1) !important;
+    border-radius: 15px !important;
+    background-color: #fff;
+    padding: 20px;
+    height: 100%; /* Garante que todos tenham o mesmo tamanho */
+}
 
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-DB_PATH = os.path.join(BASE_DIR, 'cotacoes.db')
+.service-card:hover, .card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2) !important;
+}
 
-def init_db():
-    conn = sqlite3.connect(DB_PATH)
-    cursor = conn.cursor()
-    cursor.execute('''
-        CREATE TABLE IF NOT EXISTS cotacoes (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            nome TEXT, email TEXT, telefone TEXT, tipo_seguro TEXT, mensagem TEXT,
-            data_envio DATETIME DEFAULT CURRENT_TIMESTAMP
-        )''')
-    conn.commit()
-    conn.close()
+/* 3. SEUS BOTÕES FLUTUANTES (Exatamente como você enviou) */
+.whatsapp-float {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #25d366;
+    color: white !important;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    text-decoration: none;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    z-index: 1000;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
 
-# ROTA PARA MOSTRAR O SITE
-@app.route('/')
-def index():
-    return send_from_directory('.', 'index.html')
+.whatsapp-float:hover {
+    background-color: #128c7e;
+    transform: scale(1.1);
+}
 
-# ROTA PARA SALVAR DADOS (Nomes em português para bater com o script.js)
-@app.route('/salvar_cotacao', methods=['POST'])
-def salvar_cotacao():
-    try:
-        dados = request.get_json()
-        conn = sqlite3.connect(DB_PATH)
-        cursor = conn.cursor()
-        cursor.execute('''
-            INSERT INTO cotacoes (nome, email, telefone, tipo_seguro, mensagem) 
-            VALUES (?, ?, ?, ?, ?)''',
-            (dados.get('nome'), dados.get('email'), dados.get('telefone'), 
-             dados.get('tipo_seguro'), dados.get('mensagem')))
-        conn.commit()
-        conn.close()
-        return jsonify({"status": "sucesso"}), 200
-    except Exception as e:
-        return jsonify({"status": "erro", "mensagem": str(e)}), 500
+.back-to-top {
+    position: fixed;
+    bottom: 90px;
+    right: 20px;
+    background-color: #007bff;
+    color: white !important;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    text-decoration: none;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    z-index: 999;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
 
-# ROTA PARA LIMPAR O BANCO
-@app.route('/limpar_banco', methods=['POST'])
-def limpar_banco():
-    try:
-        conn = sqlite3.connect(DB_PATH)
-        cursor = conn.cursor()
-        cursor.execute('DELETE FROM cotacoes')
-        conn.commit()
-        conn.close()
-        return redirect(url_for('ver_leads'))
-    except Exception as e:
-        return f"Erro: {e}"
+/* 4. AJUSTES PARA O FORMULÁRIO NÃO QUEBRAR */
+.form-box {
+    background: #fff;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 0 40px rgba(0,0,0,0.1);
+}
 
-# DASHBOARD DE LEADS (Acesse: seu-site.onrender.com/leads)
-@app.route('/leads')
-def ver_leads():
-    try:
-        conn = sqlite3.connect(DB_PATH)
-        cursor = conn.cursor()
-        cursor.execute('SELECT * FROM cotacoes ORDER BY data_envio DESC')
-        dados = cursor.fetchall()
-        total = len(dados)
-        conn.close()
-
-        html_template = '''
-        <!DOCTYPE html>
-        <html lang="pt-br">
-        <head>
-            <meta charset="UTF-8">
-            <title>Admin | BsProtector</title>
-            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-            <style>
-                body { background: #f8f9fa; padding: 20px; }
-                .table-card { background: white; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); padding: 20px; }
-            </style>
-        </head>
-        <body>
-            <div class="container">
-                <div class="d-flex justify-content-between align-items-center mb-4">
-                    <h2>Leads BsProtector (Total: {{ total_leads }})</h2>
-                    <form action="/limpar_banco" method="POST" onsubmit="return confirm('Apagar todos os leads?')">
-                        <button type="submit" class="btn btn-danger">Limpar Banco</button>
-                    </form>
-                </div>
-                <div class="table-card">
-                    <table class="table table-hover">
-                        <thead><tr><th>Nome</th><th>Email</th><th>Telefone</th><th>Seguro</th><th>Data</th></tr></thead>
-                        <tbody>
-                            {% for r in leads %}
-                            <tr>
-                                <td>{{ r[1] }}</td>
-                                <td>{{ r[2] }}</td>
-                                <td>{{ r[3] }}</td>
-                                <td>{{ r[4] }}</td>
-                                <td>{{ r[6] }}</td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
-                <br><a href="/" class="btn btn-primary">Voltar ao Site</a>
-            </div>
-        </body>
-        </html>
-        '''
-        return render_template_string(html_template, leads=dados, total_leads=total)
-    except Exception as e:
-        return f"Erro: {e}"
-
-# O FINAL CORRIGIDO PARA O RENDER
-if __name__ == '__main__':
-    init_db()
-    # O Render busca a porta automaticamente, se não achar usa a 10000
-    port = int(os.environ.get("PORT", 10000))
-    app.run(host='0.0.0.0', port=port)
+/* 5. SUA RESPONSIVIDADE (Mantida) */
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 2rem;
+    }
+    .hero {
+        min-height: 40vh;
+        padding: 30px 0;
+    }
+    .whatsapp-float {
+        width: 50px;
+        height: 50px;
+        font-size: 20px;
+    }
+}
