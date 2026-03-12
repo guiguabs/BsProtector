@@ -4,9 +4,11 @@ from flask import Flask, request, jsonify, render_template_string, redirect, url
 from flask_cors import CORS
 
 # Configura o Flask
+# Definimos o root_path para garantir que o Flask encontre os arquivos estáticos no Render
 app = Flask(__name__, static_folder='.', static_url_path='')
 CORS(app)
 
+# Caminho do banco de dados - Ajustado para ser persistente no diretório do projeto
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DB_PATH = os.path.join(BASE_DIR, 'cotacoes.db')
 
@@ -22,10 +24,10 @@ def init_db():
     conn.commit()
     conn.close()
 
-# COMANDO CRUCIAL: Inicializa o banco assim que o arquivo é lido pelo Render
+# Inicializa o banco assim que o arquivo é lido
 init_db()
 
-# ROTA PARA MOSTRAR O SITE
+# ROTA PARA MOSTRAR O SITE (O index.html deve estar na mesma pasta)
 @app.route('/')
 def index():
     return send_from_directory('.', 'index.html')
@@ -117,7 +119,9 @@ def ver_leads():
     except Exception as e:
         return f"Erro: {e}"
 
-# Para rodar localmente (opcional)
+# BLOCO DE EXECUÇÃO CORRIGIDO PARA O RENDER
 if __name__ == '__main__':
+    # O Render usa a variável de ambiente PORT. Se não houver, usa 10000 como padrão.
     port = int(os.environ.get("PORT", 10000))
+    # host='0.0.0.0' é obrigatório para o Render conseguir mapear a porta
     app.run(host='0.0.0.0', port=port)
