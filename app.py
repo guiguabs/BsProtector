@@ -4,35 +4,35 @@ from flask import Flask, request, jsonify, render_template_string, redirect, url
 from flask_cors import CORS
 
 # Configura o Flask
-# Definimos o root_path para garantir que o Flask encontre os arquivos estáticos no Render
 app = Flask(__name__, static_folder='.', static_url_path='')
 CORS(app)
 
-# Caminho do banco de dados - Ajustado para ser persistente no diretório do projeto
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-DB_PATH = os.path.join(BASE_DIR, 'cotacoes.db')
+# NOVIDADE: Usando /tmp para evitar erros de permissão no Render
+DB_PATH = '/tmp/cotacoes.db'
 
 def init_db():
-    conn = sqlite3.connect(DB_PATH)
-    cursor = conn.cursor()
-    cursor.execute('''
-        CREATE TABLE IF NOT EXISTS cotacoes (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            nome TEXT, email TEXT, telefone TEXT, tipo_seguro TEXT, mensagem TEXT,
-            data_envio DATETIME DEFAULT CURRENT_TIMESTAMP
-        )''')
-    conn.commit()
-    conn.close()
+    try:
+        conn = sqlite3.connect(DB_PATH)
+        cursor = conn.cursor()
+        cursor.execute('''
+            CREATE TABLE IF NOT EXISTS cotacoes (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                nome TEXT, email TEXT, telefone TEXT, tipo_seguro TEXT, mensagem TEXT,
+                data_envio DATETIME DEFAULT CURRENT_TIMESTAMP
+            )''')
+        conn.commit()
+        conn.close()
+        print("✔ Banco de dados inicializado com sucesso em " + DB_PATH)
+    except Exception as e:
+        print(f"❌ Erro ao inicializar banco: {e}")
 
-# Inicializa o banco assim que o arquivo é lido
+# Inicializa o banco ao carregar
 init_db()
 
-# ROTA PARA MOSTRAR O SITE (O index.html deve estar na mesma pasta)
 @app.route('/')
 def index():
     return send_from_directory('.', 'index.html')
 
-# ROTA PARA SALVAR DADOS
 @app.route('/salvar_cotacao', methods=['POST'])
 def salvar_cotacao():
     try:
@@ -50,7 +50,6 @@ def salvar_cotacao():
     except Exception as e:
         return jsonify({"status": "erro", "mensagem": str(e)}), 500
 
-# ROTA PARA LIMPAR O BANCO
 @app.route('/limpar_banco', methods=['POST'])
 def limpar_banco():
     try:
@@ -63,7 +62,6 @@ def limpar_banco():
     except Exception as e:
         return f"Erro: {e}"
 
-# DASHBOARD DE LEADS
 @app.route('/leads')
 def ver_leads():
     try:
@@ -87,30 +85,24 @@ def ver_leads():
             </style>
         </head>
         <body>
-            <div class="container">
+            <div class="container text-center">
                 <div class="d-flex justify-content-between align-items-center mb-4">
                     <h2>Leads BsProtector (Total: {{ total_leads }})</h2>
-                    <form action="/limpar_banco" method="POST" onsubmit="return confirm('Apagar todos os leads?')">
+                    <form action="/limpar_banco" method="POST" onsubmit="return confirm('Apagar tudo?')">
                         <button type="submit" class="btn btn-danger">Limpar Banco</button>
                     </form>
                 </div>
-                <div class="table-card">
-                    <table class="table table-hover">
-                        <thead><tr><th>Nome</th><th>Email</th><th>Telefone</th><th>Seguro</th><th>Data</th></tr></thead>
+                <div class="table-card text-start">
+                    <table class="table">
+                        <thead><tr><th>Nome</th><th>Email</th><th>Telefone</th><th>Seguro</th></tr></thead>
                         <tbody>
                             {% for r in leads %}
-                            <tr>
-                                <td>{{ r[1] }}</td>
-                                <td>{{ r[2] }}</td>
-                                <td>{{ r[3] }}</td>
-                                <td>{{ r[4] }}</td>
-                                <td>{{ r[6] }}</td>
-                            </tr>
+                            <tr><td>{{ r[1] }}</td><td>{{ r[2] }}</td><td>{{ r[3] }}</td><td>{{ r[4] }}</td></tr>
                             {% endfor %}
                         </tbody>
                     </table>
                 </div>
-                <br><a href="/" class="btn btn-primary">Voltar ao Site</a>
+                <br><a href="/" class="btn btn-secondary">Voltar ao Site</a>
             </div>
         </body>
         </html>
@@ -119,9 +111,6 @@ def ver_leads():
     except Exception as e:
         return f"Erro: {e}"
 
-# BLOCO DE EXECUÇÃO CORRIGIDO PARA O RENDER
 if __name__ == '__main__':
-    # O Render usa a variável de ambiente PORT. Se não houver, usa 10000 como padrão.
     port = int(os.environ.get("PORT", 10000))
-    # host='0.0.0.0' é obrigatório para o Render conseguir mapear a porta
     app.run(host='0.0.0.0', port=port)
