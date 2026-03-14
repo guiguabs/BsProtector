@@ -3,8 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BsProtector | Análise Técnica</title>
     
+    <title>BsProtector | Corretora de Seguros e Análise Técnica</title>
+    <meta name="description" content="Proteção inteligente para seu patrimônio. Cotações de Seguro Auto, Vida e Saúde com análise técnica personalizada pela BsProtector.">
+    <meta name="keywords" content="BsProtector, Seguro Auto, Seguro de Vida, Seguro Saúde, Corretora de Seguros, Proteção Veicular">
+    <meta name="author" content="BsProtector">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="BsProtector | Corretora de Seguros">
+    <meta property="og:description" content="Solicite sua análise técnica para seguros de forma rápida e inteligente.">
+    <meta property="og:url" content="https://bsprotector.onrender.com/">
+    <link rel="shortcut icon" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/svgs/solid/shield-alt.svg" type="image/x-icon">
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
@@ -14,7 +24,7 @@
             --blue-primary: #007bff; 
             --accent-auto: #ff8c00; 
             --accent-vida: #e91e63;
-            --accent-saude: #00ced1; /* NOVO AZUL TURQUESA PARA SAÚDE */
+            --accent-saude: #00ced1;
             --bg-light: #f1f4f8;
             --transition: all 0.4s ease;
         }
@@ -45,7 +55,6 @@
         .insurance-card i { font-size: 2.5rem; color: var(--blue-primary); margin-bottom: 12px; }
         .insurance-card h6 { font-weight: 700; margin: 0; color: var(--blue-primary); }
 
-        /* FORMULÁRIO DINÂMICO */
         #main-form-box { 
             display: none; 
             background: white; padding: 40px; border-radius: 24px; 
@@ -80,8 +89,8 @@
 
     <header class="hero-mini">
         <div class="container">
-            <h2 class="fw-bold">Proteção com Inteligência</h2>
-            <p>Selecione o ramo desejado para abrir o estudo de cotação.</p>
+            <h1 class="fw-bold">BsProtector: Proteção com Inteligência</h1>
+            <p>Selecione o ramo desejado para abrir o estudo de cotação de seguros.</p>
         </div>
     </header>
 
@@ -91,33 +100,33 @@
                 <div class="col-4 col-md-3">
                     <div class="insurance-card" id="card-auto" onclick="changeType('Auto')">
                         <i class="fas fa-car"></i>
-                        <h6>Auto</h6>
+                        <h6>Seguro Auto</h6>
                     </div>
                 </div>
                 <div class="col-4 col-md-3">
                     <div class="insurance-card" id="card-vida" onclick="changeType('Vida')">
                         <i class="fas fa-heart"></i>
-                        <h6>Vida</h6>
+                        <h6>Seguro Vida</h6>
                     </div>
                 </div>
                 <div class="col-4 col-md-3">
                     <div class="insurance-card" id="card-saude" onclick="changeType('Saúde')">
                         <i class="fas fa-hand-holding-medical"></i>
-                        <h6>Saúde</h6>
+                        <h6>Seguro Saúde</h6>
                     </div>
                 </div>
             </div>
         </div>
 
         <div id="main-form-box">
-            <h4 class="fw-bold mb-4 text-center dynamic-text">Dados para Seguro <span id="type-text">...</span></h4>
+            <h4 class="fw-bold mb-4 text-center dynamic-text">Solicitar Análise para <span id="type-text">...</span></h4>
             <form id="insuranceForm">
                 
                 <h5 class="section-title">1. Identificação Principal</h5>
                 <div class="row">
-                    <div class="col-md-6"><label class="form-label">Nome Completo</label><input type="text" class="form-control" required></div>
-                    <div class="col-md-3"><label class="form-label">CPF</label><input type="text" class="form-control" id="cpf" placeholder="000.000.000-00" required></div>
-                    <div class="col-md-3"><label class="form-label">Telefone / WhatsApp</label><input type="text" class="form-control" id="tel" placeholder="(00) 00000-0000" required></div>
+                    <div class="col-md-6"><label class="form-label">Nome Completo</label><input type="text" class="form-control" name="nome" required></div>
+                    <div class="col-md-3"><label class="form-label">CPF</label><input type="text" class="form-control" id="cpf" name="cpf" placeholder="000.000.000-00" required></div>
+                    <div class="col-md-3"><label class="form-label">Telefone / WhatsApp</label><input type="text" class="form-control" id="tel" name="whatsapp" placeholder="(00) 00000-0000" required></div>
                 </div>
 
                 <div id="fields-auto" style="display: none;">
@@ -144,7 +153,7 @@
                 <div id="obs-section">
                     <h5 class="section-title mt-4">3. Informações Adicionais</h5>
                     <div class="row">
-                        <div class="col-md-12"><textarea class="form-control" rows="3" placeholder="Detalhes que podem ajudar na análise técnica..."></textarea></div>
+                        <div class="col-md-12"><textarea class="form-control" rows="3" placeholder="Detalhes que podem ajudar na análise técnica da BsProtector..."></textarea></div>
                     </div>
                 </div>
 
@@ -153,9 +162,12 @@
         </div>
     </main>
 
-    <footer class="text-center py-4 text-muted small">BSPROTECTOR CORRETORA | Dados Protegidos (LGPD) | © 2026</footer>
+    <footer class="text-center py-4 text-muted small">
+        <strong>BSPROTECTOR CORRETORA</strong> | CNPJ em Proteção | Dados Protegidos (LGPD) | © 2026<br>
+        Especialistas em Seguro Auto, Vida e Saúde.
+    </footer>
 
-    <a href="https://wa.me/5511982917215" target="_blank" class="whatsapp-float"><i class="fab fa-whatsapp"></i></a>
+    <a href="https://wa.me/5511982917215" target="_blank" class="whatsapp-float" aria-label="Fale conosco pelo WhatsApp"><i class="fab fa-whatsapp"></i></a>
 
     <script>
         function changeType(type) {
@@ -204,12 +216,12 @@
         document.getElementById('cpf').addEventListener('input', e => {
             let v = e.target.value.replace(/\D/g, "");
             v = v.replace(/(\d{3})(\d)/, "$1.$2").replace(/(\d{3})(\d)/, "$1.$2").replace(/(\d{3})(\d{1,2})$/, "$1-$2");
-            e.target.value = v;
+            e.target.value = v.substring(0, 14);
         });
         document.getElementById('tel').addEventListener('input', e => {
             let v = e.target.value.replace(/\D/g, "");
             v = v.replace(/^(\d{2})(\d)/g, "($1) $2").replace(/(\d{5})(\d)/, "$1-$2");
-            e.target.value = v;
+            e.target.value = v.substring(0, 15);
         });
     </script>
 </body>
