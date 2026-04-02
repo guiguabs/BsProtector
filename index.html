@@ -5,6 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <title>BsProtector | Corretora de Seguros e Análise Técnica</title>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "BsProtector",
+      "url": "https://bsprotector.onrender.com/"
+    }
+    </script>
     <meta name="description" content="Proteção inteligente para seu patrimônio. Cotações de Seguro Auto, Vida e Saúde com análise técnica personalizada pela BsProtector.">
     <meta name="keywords" content="BsProtector, Seguro Auto, Seguro de Vida, Seguro Saúde, Corretora de Seguros, Proteção Veicular">
     <meta name="author" content="BsProtector">
@@ -42,7 +51,6 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.05); height: 100%;
         }
 
-        /* ESTADOS ATIVOS DOS CARDS */
         .insurance-card.active-auto { border-color: var(--accent-auto); background-color: #fff9f0; transform: translateY(-8px); }
         .insurance-card.active-auto i, .insurance-card.active-auto h6 { color: var(--accent-auto) !important; }
 
@@ -212,7 +220,6 @@
             formBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
 
-        // Máscaras CPF e Tel
         document.getElementById('cpf').addEventListener('input', e => {
             let v = e.target.value.replace(/\D/g, "");
             v = v.replace(/(\d{3})(\d)/, "$1.$2").replace(/(\d{3})(\d)/, "$1.$2").replace(/(\d{3})(\d{1,2})$/, "$1-$2");
